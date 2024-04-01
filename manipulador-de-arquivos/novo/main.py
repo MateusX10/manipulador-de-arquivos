@@ -39,7 +39,7 @@ while True:
     while arquivo_texto1.arquivo_existe():
 
         # opções do menu
-        opcoes_menu = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        opcoes_menu = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
         # exibe o menu
         menu()
@@ -355,9 +355,51 @@ while True:
 
 
 
+            elif escolhaUsuario == 9:
+
+                nome_da_pasta_existe = False
+
+                nome_da_pasta = ''
+                
+                dados_do_arquivo_de_texto_principal = arquivo_texto1.retorna_lista_de_dados_do_arquivo_de_texto()
+
+
+                dados_do_arquivo_de_texto_principal_formatados = arquivo_texto1.formata_dados_recebidos_do_arquivo_principal_para_string(dados_do_arquivo_de_texto_principal)
+
+
+                print(os.listdir())
+
+
+                while not nome_da_pasta_existe:
+
+                    nome_da_pasta = str(input("Nome da pasta: ")).strip()
+
+                    pasta_existe = arquivo_texto1.verifica_se_o_nome_da_pasta_especificado_ja_existe_no_diretorio(nome_da_pasta)
+
+
+                    if pasta_existe:
+
+                        break
+
+                    print("\033[1;31mA pasta não existe.Tente novamente com uma pasta existente\033[m")
+
+
+
+                nome_do_arquivo =  os.listdir(f'novo/{nome_da_pasta}/')
+
+                # pega o único nome de arquivo da lista, que é o arquivo a ter dados copiados nele
+                nome_do_arquivo = nome_do_arquivo[0]
+
+                    
+                arquivo_texto1.copia_dados_do_arquivo_principal_para_o_arquivo_de_copia(nome_da_pasta, nome_do_arquivo, dados_do_arquivo_de_texto_principal_formatados)
+                    
+
+
+
+
 
                         
-            elif escolhaUsuario == 9:
+            elif escolhaUsuario == 10:
 
                 exit(0)    
 

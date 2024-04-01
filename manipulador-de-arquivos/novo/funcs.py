@@ -9,7 +9,8 @@ def menu():
 [ 6 ] - Renomear arquivo
 [ 7 ] - Excluir arquivo
 [ 8 ] - Copiar para um novo arquivo
-[ 9 ] - Sair
+[ 9 ] - Copiar para um arquivo existente
+[ 10 ] - Sair
 ''')
 
 

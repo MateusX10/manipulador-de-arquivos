@@ -280,7 +280,7 @@ class ArquivoDeTexto:
 
 
     @staticmethod
-    def verifica_se_o_nome_da_pasta_especificado_ja_existe_no_diretorio(nome_da_pasta_a_ser_criada):
+    def verifica_se_o_nome_da_pasta_especificado_ja_existe_no_diretorio(nome_da_pasta):
 
 
 
@@ -300,7 +300,7 @@ class ArquivoDeTexto:
 
         for pasta_do_diretorio in lista_pastas:
 
-            if f"{caminho}{nome_da_pasta_a_ser_criada}" == pasta_do_diretorio:
+            if f"{caminho}{nome_da_pasta}" == pasta_do_diretorio:
 
                 pasta_ja_existe = True
 
@@ -360,6 +360,7 @@ class ArquivoDeTexto:
     def copia_dados_do_arquivo_principal_para_o_arquivo_de_copia(pasta, nome_do_arquivo, dados_do_arquivo_de_texto_principal):
 
 
+
         nome_da_pasta = f"novo/{pasta}/"
 
         with open(os.path.join(nome_da_pasta, nome_do_arquivo), 'w') as arquivo:
@@ -382,3 +383,6 @@ class ArquivoDeTexto:
 
         return dados_para_string
 
+
+
+    
