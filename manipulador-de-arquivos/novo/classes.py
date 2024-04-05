@@ -234,6 +234,23 @@ class ArquivoDeTexto:
 
 
     @staticmethod
+    def exibe_pastas_do_diretório_atual():
+        
+        
+        caminho = "novo/"
+
+
+        lista_arquivos = os.listdir(caminho)
+
+
+        lista_pastas = [item for item in lista_arquivos if os.path.isdir(f"novo/{item}")]
+
+
+        for pasta in lista_pastas:
+
+            print(f"- {pasta}")
+
+    @staticmethod
     def valida_nome_da_pasta(nome_da_pasta):
 
 
@@ -295,7 +312,7 @@ class ArquivoDeTexto:
 
         lista_pastas = [os.path.join(caminho, item) for item in lista_arquivos if os.path.isdir(os.path.join(caminho, item))]
 
-        print(lista_pastas)
+        #print(lista_pastas)
 
 
         for pasta_do_diretorio in lista_pastas:
