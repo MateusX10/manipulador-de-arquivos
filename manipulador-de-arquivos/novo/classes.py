@@ -2,16 +2,24 @@ import os
 
 
 class ArquivoDeTexto:
+    '''-> Classe que representa  um arquivo de texto, permitindo um arquivo  de texto, como fazer um CRUD no arquivo de texto, por exemplo.
+    '''
 
 
-    def __init__(self, nome):
+
+    def __init__(self, nome)-> None:
+
+        '''-> Construtor da classe
+
+            Parâmetros:
+
+                nome(str): nome do arquivo de texto 
+        '''
 
         self.nome = nome 
 
 
         # cria arquivo
-
-
         caminho_da_pasta = "novo/arquivo de texto/"
 
         # "path.join()" cria o arquivo no caminho da pasta especificado
@@ -23,32 +31,51 @@ class ArquivoDeTexto:
         
 
     @property
-    def nome(self):
+    def nome(self)-> str:
+        '''-> Getter para o atributo "self.nome"
+        '''
 
         return self._nome
 
 
 
     @nome.setter
-    def nome(self, nome):
+    def nome(self, nome)-> None:
+        '''-> Setter para o atributo "self.nome"
+
+
+            Parâmetros:
+
+                nome(str): nome do arquivo de texto
+        '''
 
         
+
+        # lista de extensões de arquivo
         lista_extensoes_arquivo = [
     "txt", "csv", "json", "html", "css", "js",
     "py", "java", "cpp", "c","php"
 ]
         # o arquivo possui uma extensão/formato
         if "." in nome:
+            
 
+            # divide o arquivo a partir do "." da extensão do arquivo
+            # exemplo: nome do arquivo é "arquivo.txt"
+            # Logo, o conteúdo da variável "Nome_de_arquivo_dividido" será "['arquivo', 'txt']"
             nome_de_arquivo_dividido = nome.rsplit(".")
 
+
+            # verifica se a extensão do arquivo não está na lista de extensões de arquivo permitidas
             if nome_de_arquivo_dividido[-1] not in lista_extensoes_arquivo:
 
+                # caos não esteja, o nome do arquivo passa a ser o NOME DO ARQUIVO + EXTENSÃO .TXT (a extensão antiga é excluída)
                 nome = "".join(nome_de_arquivo_dividido[:-1]) + ".txt"
 
         # arquivo não possui uma extensão, é um arquivo sem formato
         else:
-
+            
+            # o nome do arquivo passa a ser o NOME DO ARQUIVO + .TXT
             nome = f"{nome}.txt"
 
 
@@ -59,11 +86,20 @@ class ArquivoDeTexto:
         
     def __str__(self):
 
+        '''-> Método mágico que exibe o nome do arquivo de texto
+        '''
+
         print(f'''Nome do arquivo de texto: {self.nome}''')
 
 
 
-    def arquivo_existe(self):
+    def arquivo_existe(self)-> bool:
+        '''-> Verifica se o arquivo existe
+
+            Parâmetros:
+
+                return: "True" para "o arquivo existe";  False para "O arquivo não existe"
+        '''
 
 
         caminho_do_arquivo = "novo/arquivo de texto/"
@@ -72,6 +108,7 @@ class ArquivoDeTexto:
         nome_do_arquivo = self.nome
 
 
+        # pega o arquivo e junta com seu caminho
         arquivo_com_caminho = os.path.join(caminho_do_arquivo, nome_do_arquivo)
 
         # o caminho/arquivo existe
@@ -88,25 +125,44 @@ class ArquivoDeTexto:
 
 
 
-    def arquivo_vazio(self):
+    def arquivo_vazio(self)-> bool:
+
+        '''-> Verifica se o arquivo está vazio
+
+            Parâmetros:
+
+                return: "True" para "o arquivo ESTÁ VAZIO"; "False" para "o arquivo NÃO ESTÁ VAZIO"
 
 
+        '''
+
+        # constroi o caminho para o arquivo
         caminho_completo_do_arquivo = os.path.join("novo/arquivo de texto", self.nome)
 
 
+        # arquivo está vazio
         if os.path.getsize(caminho_completo_do_arquivo) == 0:
 
             return True
 
+        # arquivo não está vazio
         else:
 
             return False
 
-    def adicionar_linha_de_texto(self, linha_de_texto):
+    def adicionar_linha_de_texto(self, linha_de_texto)-> None:
+        '''-> Adicioan uma linha de texto ao arquivo de texto
+
+            Parâmetros:
+
+                linha_de_texto(str): linha de texto a ser adicionada
+                return: sem retorno
+        '''
 
 
         nome_arquivo = self.nome
 
+        # abre o arquivo em modo de escrita montando o arquivo completo dele
         with open(os.path.join("novo/arquivo de texto/", nome_arquivo), "a") as arquivo:
 
 
@@ -114,13 +170,21 @@ class ArquivoDeTexto:
 
 
     
-    def lerArquivo(self):
+    def lerArquivo(self)-> None:
+        '''-> Lê/exibe os dados do arquivo de texto
 
+            Parâmetros:
+
+                return: None
+        '''
+
+        # abre o arquivo em modo de leitura, construindo o caminho completo do arquivo
         with open(os.path.join("novo/arquivo de texto/", self.nome), "r") as arquivo:
-
+            
+            # retorna/recebe uma lista com os dados do arquivo de texto
             lista_dados = arquivo.readlines()
 
-
+            # exibe os dados do arquivo de texto
             for posicao, linha in enumerate(lista_dados):
 
 
@@ -129,12 +193,21 @@ class ArquivoDeTexto:
 
 
     
-    def retorna_lista_de_dados_do_arquivo_de_texto(self):
+    def retorna_lista_de_dados_do_arquivo_de_texto(self)-> list:
+        
+        '''-> Retorna uma lista dos dados do arquivo de texto
 
+            Parâmetros:
 
+                return: retorna a lista de dados do arquivo de texto
+        '''
+
+        
+        # abre o arquivo em modo de leitura, construindo o caminho completo do arquivo
         with open(os.path.join("novo/arquivo de texto/", self.nome), "r") as arquivo:
 
-
+            
+            # retorna/ recebe a lista dos dados do arquivo de texto
             lista_dados = arquivo.readlines()
 
 
@@ -142,7 +215,17 @@ class ArquivoDeTexto:
 
 
     def editar_arquivo(self, posicao_da_linha_a_ser_modificada, novo_dado):
+        '''-> Edita uma linha do arquivo de texto
 
+
+            Parâmetros:
+
+                posicao_da_linha_a_ser_modificada(int): posição da linha do arquivo de texto a ser modificada
+                novo_dado(str): novo dado a ser inserido na linha modificada
+                return: uma lista contendo os novos dados do arquivo de texto (os novos dados ainda não foram subscritos no arquivo, apenas tem-se os dados em uma lista)
+
+        '''
+        
         with open(os.path.join("novo/arquivo de texto/", self.nome), "r") as arquivo:
 
             lista_dados = arquivo.readlines()

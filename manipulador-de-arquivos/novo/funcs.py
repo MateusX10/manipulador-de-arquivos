@@ -1,4 +1,5 @@
 def menu():
+    
 
     print('''Menu de opções:
 [ 1 ] - Adicionar linha de texto
